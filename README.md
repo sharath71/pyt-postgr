@@ -12,6 +12,6 @@ This project implements a comprehensive sales data pipeline for a retail company
 ## Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your_username/sales-data-pipeline.git
+   git clone https://github.com/shrahman0410/sales-data-pipeline.git
    cd sales-data-pipeline
 

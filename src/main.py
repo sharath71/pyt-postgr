@@ -3,6 +3,7 @@ import pandas as pd
 import fetch_source_data
 import data_process_tranform
 import data_calculations
+import data_storage
 
 
 def main():
@@ -33,7 +34,7 @@ def main():
     sales_trends = data_calculations.analyze_sales_trends(processed_data)
 
     # Store transformed data in database
-    # data_store.store_data_in_database(processed_data)
+    #data_storage.store_data_in_database(processed_data)
 
     # Print or visualize insights (not implemented in this code snippet)
     print(processed_data)

@@ -25,42 +25,27 @@ def create_tables(conn):
   
   try:
     cur = conn.cursor()
-    # Execute CREATE TABLE statements
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS transformed_data (
-        customer_id SERIAL PRIMARY KEY,
-        order_date DATE,  
-        product_id TEXT,
-        sales INTEGER,
-        temp NUMERIC,
-        description TEXT,
-        weather TEXT);''')
 
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS aggregated_data (
-        customer_id PRIMARY KEY,
-        total_sales INTEGER);''')
-        conn.commit()
+    # Create table if not exists
+    cur.execute('''CREATE TABLE IF NOT EXISTS Sales (
+                        sale_id SERIAL PRIMARY KEY,
+                        customer_id INTEGER,
+                        product_id INTEGER,
+                        sale_amount REAL,
+                        sale_date TIMESTAMP,
+                        name TEXT,
+                        username TEXT,
+                        email TEXT,
+                        lat REAL,
+                        lng REAL,
+                        temperature REAL,
+                        weather_conditions TEXT
+                    )''')
+
     
   except (Exception, psycopg2.DatabaseError) as error:
     logger.error(error)
     
-  finally:
-    cur.close()
-
-def load_data(conn):
-
-  sql = """INSERT INTO transformed_data 
-            (date, product, sales, revenue) VALUES (%s, %s, %s, %s)"""
-            
-  try:  
-    cur = conn.cursor()
-    cur.execute(sql, (date, product, sales, revenue))
-    conn.commit()
-    
-  except (Exception, psycopg2.DatabaseError) as error:
-    logger.error(error)
-  
   finally:
     cur.close()
     
@@ -70,7 +55,7 @@ def main():
   
   create_tables(conn)
   
-  load_data(conn)
+  #load_data(conn)
 
   conn.close()
   
